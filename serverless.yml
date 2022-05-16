@@ -8,9 +8,6 @@ provider:
 functions:
   demo:
     role: arn:aws:lambda:ap-south-1:237918227349:function:demo
-    ...
-  func1:
-    ... # does not define role
 
 resources:
   Resources:
