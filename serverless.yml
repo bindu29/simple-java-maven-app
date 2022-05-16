@@ -1,0 +1,93 @@
+service: kpi-inbound-decrypt
+
+provider:
+  name: aws
+  iam:
+    role: myDefaultRole
+
+functions:
+  demo:
+    role: arn:aws:lambda:ap-south-1:237918227349:function:demo
+    ...
+  func1:
+    ... # does not define role
+
+resources:
+  Resources:
+    myDefaultRole:
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /my/default/path/
+        RoleName: MyDefaultRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: myPolicyName
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow # note that these rights are given in the default policy and are required if you want logs out of your lambda(s)
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'Fn::Join':
+                      - ':'
+                      -
+                        - 'arn:aws:logs'
+                        - Ref: 'AWS::Region'
+                        - Ref: 'AWS::AccountId'
+                        - 'log-group:/aws/lambda/*:*:*'
+                -  Effect: "Allow"
+                   Action:
+                     - "s3:PutObject"
+                   Resource:
+                     Fn::Join:
+                       - ""
+                       - - "arn:aws:s3:::"
+                         - "Ref" : "ServerlessDeploymentBucket"
+    myCustRole0:
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /my/cust/path/
+        RoleName: MyCustRole0
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: myPolicyName
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'Fn::Join':
+                      - ':'
+                      -
+                        - 'arn:aws:logs'
+                        - Ref: 'AWS::Region'
+                        - Ref: 'AWS::AccountId'
+                        - 'log-group:/aws/lambda/*:*:*'
+                - Effect: Allow
+                  Action:
+                    - ec2:CreateNetworkInterface
+                    - ec2:DescribeNetworkInterfaces
+                    - ec2:DetachNetworkInterface
+                    - ec2:DeleteNetworkInterface
+                  Resource: "*"
