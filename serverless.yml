@@ -17,17 +17,8 @@ provider:
           Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
         - Effect: "Allow"
           Action:
-            - "s3:PutObject" ,
-            - "cloudformation:*",
-            - "s3:*",
-            - "logs:*",
-            - "iam:*",
-            - "apigateway:*",
             - "lambda:*",
-            - "ec2:DescribeSecurityGroups",
-            - "ec2:DescribeSubnets",
-            - "ec2:DescribeVpcs",
-            - "events:*"
+            
           Resource:
             Fn::Join:
               - ""
