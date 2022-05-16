@@ -5,7 +5,7 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.8
-  region: ap-south-1
+  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
   iam:
@@ -17,7 +17,7 @@ provider:
           Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
         - Effect: "Allow"
           Action:
-            - "lambda:*",
+            - "lambda:*"
             
           Resource:
             Fn::Join:
