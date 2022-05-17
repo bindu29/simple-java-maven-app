@@ -4,17 +4,17 @@ frameworkVersion: '3'
 provider:
   name: aws
   iam:
-    role: service-role
+    role: test-role-jyalqts2
  
 functions:
   demo:
 
 resources:
   Resources:
-    service-role:
+    test-role-jyalqts2:
       Type: AWS::IAM::Role
       Properties:
-        RoleName: service-role
+        RoleName: test-role-jyalqts2
         AssumeRolePolicyDocument:
           Version: '2012-10-17'
           Statement:
