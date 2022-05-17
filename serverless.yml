@@ -5,7 +5,7 @@ frameworkVersion: '3'
 provider:
 iam:
     deploymentRole:
-	  Fn::Sub: 'arn:aws:iam::${AWS::AccountId}:role/MyApp-CloudFormationExecutionRole'
+    Fn::Sub: 'arn:aws:iam::${AWS::AccountId}:role/MyApp-CloudFormationExecutionRole'
 # `DeployerRole` policies
 Policies:
   - PolicyName: DelegateToCloudFormationRole
