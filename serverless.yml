@@ -11,7 +11,7 @@ functions:
 
 resources:
   Resources:
-    jenkins-instance-role:
+    service-role:
       Type: AWS::IAM::Role
       Properties:
         RoleName: service-role
