@@ -75,14 +75,14 @@ Policies:
           Action:
             - s3:List*
           Resource: '*'
-  AssumeRolePolicyDocument:
-  Version: 2012-10-17
-  Statement:
-    - Effect: Allow
-      Principal:
-        Service: cloudformation.amazonaws.com
-      Action: sts:AssumeRole
-    # `CloudFormationExecutionRole` policies
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+          Statement:
+        - Effect: Allow
+          Principal:
+            Service: cloudformation.amazonaws.com
+       Action: sts:AssumeRole
+        # `CloudFormationExecutionRole` policies
 ManagedPolicyArns:
   - arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
 Policies:
