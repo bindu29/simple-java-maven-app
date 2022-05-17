@@ -1,7 +1,7 @@
 import json
 
 
-def lambda (event, context):
+def demo (event, context):
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event
