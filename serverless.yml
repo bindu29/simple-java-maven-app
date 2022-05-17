@@ -17,7 +17,7 @@ provider:
           Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
         - Effect: "Allow"
           Action:
-            - "lambda:*""
+            - "lambda:*"
           Resource:
             Fn::Join:
               - ""
