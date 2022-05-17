@@ -8,11 +8,10 @@ provider:
  
 functions:
   demo:
-    role: test-role-jyalqts2
 
 resources:
   Resources:
-    service-role:
+    jenkins-instance-role:
       Type: AWS::IAM::Role
       Properties:
         RoleName: service-role
@@ -50,41 +49,4 @@ resources:
                        - ""
                        - - "arn:aws:s3:::"
                          - "Ref" : "ServerlessDeploymentBucket"
-    demo:
-      Type: AWS::IAM::Role
-      Properties:
-        RoleName: demo
-        AssumeRolePolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-            - Effect: Allow
-              Principal:
-                Service:
-                  - lambda.amazonaws.com
-              Action: sts:AssumeRole
-        Policies:
-          - PolicyName: AWSLambdaBasicExecutionRole
-            PolicyDocument:
-              Version: '2012-10-17'
-              Statement:
-                - Effect: Allow
-                  Action:
-                    - logs:CreateLogGroup
-                    - logs:CreateLogStream
-                    - logs:PutLogEvents
-                  Resource:
-                    - 'Fn::Join':
-                      - ':'
-                      -
-                        - 'arn:aws:logs'
-                        - Ref: 'AWS::Region'
-                        - Ref: 'AWS::AccountId'
-                        - 'log-group:/aws/lambda/*:*:*'
-                - Effect: Allow
-                  Action:
-                    - ec2:CreateNetworkInterface
-                    - ec2:DescribeNetworkInterfaces
-                    - ec2:DetachNetworkInterface
-                    - ec2:DeleteNetworkInterface
-                  Resource: "*"
- 
+    
