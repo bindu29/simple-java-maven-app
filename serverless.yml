@@ -1,5 +1,7 @@
 service: root
+
 frameworkVersion: '3'
+
 provider:
   name: aws
   runtime: python3.8
@@ -15,14 +17,15 @@ provider:
           Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
         - Effect: "Allow"
           Action:
-            - "lambda:*"
-            
+            - "lambda:*""
           Resource:
             Fn::Join:
               - ""
               - - "arn:aws:s3:::"
-              - "Ref" : "ServerlessDeploymentBucket"
-              - "/*"
+                - "Ref" : "ServerlessDeploymentBucket"
+                - "/*"
+
+
 functions:
   hello:
     handler: handler.hello
