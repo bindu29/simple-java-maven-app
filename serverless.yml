@@ -1,4 +1,4 @@
-service: root
+service: demo
 
 frameworkVersion: '3'
 
@@ -27,5 +27,5 @@ provider:
 
 
 functions:
-  hello:
-    handler: handler.hello
+  lambda:
+    handler: handler.lambda
