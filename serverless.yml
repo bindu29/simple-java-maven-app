@@ -4,15 +4,12 @@ frameworkVersion: '3'
 provider:
   name: aws
   iam:
-    role: myDefaultRole
+    role: service-role
  
 functions:
-  func0:
-    role: myCustRole0
-    ...
-  func1:
-    ... # does not define role
- 
+  demo:
+    role: test-role-jyalqts2
+
 resources:
   Resources:
     service-role:
