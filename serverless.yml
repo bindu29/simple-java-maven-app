@@ -1,40 +1,38 @@
-service: demo
-
-frameworkVersion: '3'
 provider:
-  name: aws  
   iam:
     role: arn:aws:iam::237918227349:role/jenkins-instance-role
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - lambda.amazonaws.com
-            Action:
-              - 'sts:AssumeRole'
-     
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/jenkins-instance-role/AWSLambdaBasicExecutionRole
-      Policies:
-        - PolicyName: root
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - lambda:Get*
-                  - lambda:List*
-                  - lambda:CreateFunction
-                  - lambda:DeleteFunction
-                  - lambda:CreateFunction
-                  - lambda:DeleteFunction
-                  - lambda:UpdateFunctionConfiguration
-                  - lambda:UpdateFunctionCode
-                  - lambda:PublishVersion
-                  - lambda:CreateAlias
-                  - lambda:DeleteAlias
-                  - lambda:UpdateAlias
-                  - lambda:AddPermission
-                  - lambda:RemovePermission
-                  - lambda:InvokeFunction
-                Resource: '*'  
+	Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: AWSLambdaBasicExecutionRole
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - lambda:Get*
+                    - lambda:List*
+                    - lambda:CreateFunction
+                    - lambda:DeleteFunction
+                    - lambda:CreateFunction
+                    - lambda:DeleteFunction
+                    - lambda:UpdateFunctionConfiguration
+                    - lambda:UpdateFunctionCode
+                    - lambda:PublishVersion
+                    - lambda:CreateAlias
+                    - lambda:DeleteAlias
+                    - lambda:UpdateAlias
+                    - lambda:AddPermission
+                    - lambda:RemovePermission
+                    - lambda:InvokeFunction
+
+                  Resource: "*"
+
+ 
