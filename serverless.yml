@@ -20,7 +20,7 @@ provider:
                  - lambda:AddPermission
                  - lambda:RemovePermission
                  - lambda:InvokeFunction
-			  Resource: '*'
+	      Resource: '*'
       managedPolicies:
         - 'arn:aws:iam::237918227349:user/*'
       permissionsBoundary: arn:aws:iam::237918227349:policy/boundaries
