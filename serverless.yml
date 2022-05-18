@@ -1,29 +1,41 @@
+service: new-service
+
 provider:
   name: aws
-  iam:
+
+functions:
+  demo:
     role: arn:aws:iam::237918227349:role/jenkins-instance-role
-      statements:
-        - Effect: 'Allow'
-              Action: 
-                 - lambda:Get*
-                 - lambda:List*
-                 - lambda:CreateFunction
-                 - lambda:DeleteFunction
-                 - lambda:CreateFunction
-                 - lambda:DeleteFunction
-                 - lambda:UpdateFunctionConfiguration
-                 - lambda:UpdateFunctionCode
-                 - lambda:PublishVersion
-                 - lambda:CreateAlias
-                 - lambda:DeleteAlias
-                 - lambda:UpdateAlias
-                 - lambda:AddPermission
-                 - lambda:RemovePermission
-                 - lambda:InvokeFunction
-	      Resource: '*'
-      managedPolicies:
-        - 'arn:aws:iam::237918227349:user/*'
-      permissionsBoundary: arn:aws:iam::237918227349:policy/boundaries
-      tags:
-        key: value
-    deploymentRole: arn:aws:iam::237918227349:role/demo			 
+
+resources:
+  Resources:
+    arn:aws:iam::237918227349:role/jenkins-instance-role:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: jenkins-instance-role
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: AWSLambdaBasicExecutionRole	
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource: '*'
+                - Effect: Allow
+                  Action:
+                    - ec2:CreateNetworkInterface
+                    - ec2:DescribeNetworkInterfaces
+                    - ec2:DetachNetworkInterface
+                    - ec2:DeleteNetworkInterface
+                  Resource: "*"
