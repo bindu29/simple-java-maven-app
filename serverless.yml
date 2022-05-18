@@ -1,9 +1,9 @@
 provider:
+  name: aws
   iam:
     role: arn:aws:iam::237918227349:role/jenkins-instance-role
       statements:
         - Effect: 'Allow'
-          Resource: '*'
               Action: 
                  - lambda:Get*
                  - lambda:List*
@@ -20,6 +20,7 @@ provider:
                  - lambda:AddPermission
                  - lambda:RemovePermission
                  - lambda:InvokeFunction
+			  Resource: '*'
       managedPolicies:
         - 'arn:aws:iam::237918227349:user/*'
       permissionsBoundary: arn:aws:iam::237918227349:policy/boundaries
