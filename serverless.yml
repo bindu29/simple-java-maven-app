@@ -3,7 +3,7 @@ provider:
     role: arn:aws:iam::237918227349:role/jenkins-instance-role
       statements:
         - Effect: 'Allow'
-		  Resource: '*'
+          Resource: '*'
               Action: 
                  - lambda:Get*
                  - lambda:List*
