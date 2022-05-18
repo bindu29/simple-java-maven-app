@@ -4,18 +4,7 @@ frameworkVersion: '3'
 provider:
   name: aws  
   iam:
-    role: jenkins-instance-role
-
-functions: 
-  demo:
-
-resources:
-  Resources:
-  jenkins-instance-role:
-    Type: 'AWS::IAM::Role'
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
+    role: arn:aws:iam::237918227349:role/jenkins-instance-role
         Statement:
           - Effect: Allow
             Principal:
