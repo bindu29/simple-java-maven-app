@@ -3,9 +3,6 @@ service: new-service
 provider:
   name: aws
 
-functions:
-  demo:
-    role: arn:aws:iam::237918227349:role/jenkins-instance-role
 
 resources:
   Resources:
