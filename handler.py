@@ -1,13 +1,24 @@
-import boto3
+import json
 
 
 def demo (event, context):
-    
-    sts_connection = boto3.client('sts')
-    acct_b = sts_connection.assume_role(
-        RoleArn="arn:aws:iam::237918227349:role/jenkins-instance-role",
-        RoleSessionName="jenkins-instance-role"
-    )
-    
+    body = {
+        "message": "Go Serverless v1.0! Your function executed successfully!",
+        "input": event
+    }
 
-    return "Hello from Lambda"
+    response = {
+        "statusCode": 200,
+        "body": json.dumps(body)
+    }
+
+    return response
+
+    # Use this code if you don't use the http event with the LAMBDA-PROXY
+    # integration
+    """
+    return {
+        "message": "Go Serverless v1.0! Your function executed successfully!",
+        "event": event
+    }
+    """
