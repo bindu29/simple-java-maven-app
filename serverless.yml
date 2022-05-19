@@ -1,37 +1,33 @@
+service: root
+
+frameworkVersion: '3'
 
 provider:
   name: aws
+  runtime: python3.8
+
+  region: us-east-1
+
+# you can add statements to the Lambda function's IAM Role here
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:ListBucket"
+          Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+        - Effect: "Allow"
+          Action:
+            - "lambda:*"
+          Resource:
+            Fn::Join:
+              - ""
+              - - "arn:aws:s3:::"
+                - "Ref" : "ServerlessDeploymentBucket"
+                - "/*"
 
 
-resources:
-  Resources:
-    arn:aws:iam::237918227349:role/jenkins-instance-role:
-      Type: AWS::IAM::Role
-      Properties:
-        RoleName: jenkins-instance-role
-        AssumeRolePolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-            - Effect: Allow
-              Principal:
-                Service:
-                  - lambda.amazonaws.com
-              Action: sts:AssumeRole
-        Policies:
-          - PolicyName: AWSLambdaBasicExecutionRole	
-            PolicyDocument:
-              Version: '2012-10-17'
-              Statement:
-                - Effect: Allow
-                  Action:
-                    - logs:CreateLogGroup
-                    - logs:CreateLogStream
-                    - logs:PutLogEvents
-                  Resource: '*'
-                - Effect: Allow
-                  Action:
-                    - ec2:CreateNetworkInterface
-                    - ec2:DescribeNetworkInterfaces
-                    - ec2:DetachNetworkInterface
-                    - ec2:DeleteNetworkInterface
-                  Resource: "*"
+
+functions:
+  hello:
+    handler: handler.hello
